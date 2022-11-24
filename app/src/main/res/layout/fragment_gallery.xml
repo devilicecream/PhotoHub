@@ -5,7 +5,7 @@
     style="@style/ParentLayoutBackgroundAppearance"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/dimen_16_dp"
+    android:padding="@dimen/dimen_0_dp"
     tools:context=".features.gallery.presentation.GalleryFragment">
 
 
@@ -15,6 +15,8 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:theme="@style/AppTitleTextAppearance"
+        android:paddingTop="@dimen/dimen_16_dp"
+        android:paddingStart="@dimen/dimen_16_dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +28,7 @@
         android:animateLayoutChanges="true"
         android:animationCache="true"
         android:visibility="gone"
+        android:layout_marginEnd="@dimen/dimen_16_dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_app_headline"
@@ -63,7 +66,8 @@
         android:contentDescription="@string/app_name"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_16_dp"
+        android:layout_marginTop="@dimen/dimen_8_dp"
+        android:layout_marginStart="@dimen/dimen_8_dp"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

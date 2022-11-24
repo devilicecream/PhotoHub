@@ -42,7 +42,7 @@ class FullScreenImageFragment : Fragment() {
     }
 
     @Subscribe
-    public fun onEvent(event : DPadEvent) {
+    fun onEvent(event : DPadEvent) {
         // Called by eventBus when an event occurs
 //        showSnackBar(mBinding, "DPAD: " + event.keyCode.toString())
         if (event.keyCode == 22) {

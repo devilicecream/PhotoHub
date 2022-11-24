@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dimen_8_dp"
+    android:layout_marginEnd="@dimen/dimen_8_dp"
+    android:background="@drawable/photo_item_background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -13,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="@dimen/dimen_8_dp"
+        android:padding="8dp"
         app:shapeAppearance="?attr/actionButtonStyle"
         app:shapeAppearanceOverlay="@style/imageViewRounded"
         android:id="@+id/ivGalleryPhoto"/>

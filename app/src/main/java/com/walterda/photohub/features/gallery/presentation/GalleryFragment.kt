@@ -144,7 +144,7 @@ class GalleryFragment : Fragment() {
     }
 
     @Subscribe
-    public fun onEvent(event : NavigationEvent) {
+    fun onEvent(event : NavigationEvent) {
         // Called by eventBus when an event occurs
 //        Log.e("NAV", "onNavEvent: " + event.direction.toString(), )
         val nextItem: PhotoListItem = when (event.direction) {

@@ -15,6 +15,7 @@ abstract class BasePagingAdapter<T : Any, V : ViewBinding>(
     diffCallback: DiffUtil.ItemCallback<T>
 ) : PagingDataAdapter<T, BaseViewHolder<V>>(diffCallback) {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<V> {
         val binding = createBinding(parent)
         return BaseViewHolder(binding)
@@ -27,4 +28,5 @@ abstract class BasePagingAdapter<T : Any, V : ViewBinding>(
     }
 
     protected abstract fun bind(binding: V, item: T, position: Int)
+
 }
