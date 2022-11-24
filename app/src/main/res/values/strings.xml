@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">PhotoHub</string>
-    <string name="full_screen_image">FullScreenImage</string>
-    <string name="gallery">Gallery</string>
-    <string name="photo_download_failed"><![CDATA[Sorry! Photo can\'t be downloaded, please make sure you are connected to internet & try again]]></string>
+    <string name="app_name">Fotografie</string>
+    <string name="full_screen_image">A tutto schermo</string>
+    <string name="gallery">Galleria</string>
+    <string name="photo_download_failed">Non è stato possibile scaricare la foto! Contatta Walter se continua a non funzionare.</string>
 </resources>
