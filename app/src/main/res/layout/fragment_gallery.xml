@@ -5,7 +5,10 @@
     style="@style/ParentLayoutBackgroundAppearance"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/dimen_0_dp"
+    android:paddingBottom="@dimen/dimen_0_dp"
+    android:paddingTop="@dimen/dimen_16_dp"
+    android:paddingStart="@dimen/dimen_24_dp"
+    android:paddingEnd="@dimen/dimen_24_dp"
     tools:context=".features.gallery.presentation.GalleryFragment">
 
 
@@ -18,7 +21,20 @@
         android:paddingTop="@dimen/dimen_16_dp"
         android:paddingStart="@dimen/dimen_16_dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_app_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ciao"
+        android:theme="@style/AppSubtitleTextAppearance"
+        android:paddingTop="@dimen/dimen_32_dp"
+        android:paddingEnd="@dimen/dimen_16_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
 
 
     <com.facebook.shimmer.ShimmerFrameLayout

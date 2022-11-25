@@ -66,6 +66,7 @@ class GalleryFragment : Fragment() {
     }
 
     private fun setViews() {
+
         insetsController?.isAppearanceLightStatusBars = true
         mBinding.apply {
             galleryRV.apply {

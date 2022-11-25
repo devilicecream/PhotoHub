@@ -24,8 +24,13 @@
 
     <style name="AppTitleTextAppearance" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/white_200</item>
-        <item name="android:textSize">@dimen/dimen_24_sp</item>
+        <item name="android:textSize">@dimen/dimen_48_sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppSubtitleTextAppearance" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/white_200</item>
+        <item name="android:textSize">@dimen/dimen_32_sp</item>
     </style>
 
     <style name="imageViewRounded">

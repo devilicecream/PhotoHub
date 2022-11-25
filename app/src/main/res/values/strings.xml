@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">Fotografie</string>
+    <string name="ciao">Ciao</string>
     <string name="full_screen_image">A tutto schermo</string>
     <string name="gallery">Galleria</string>
     <string name="photo_download_failed">Non è stato possibile scaricare la foto! Contatta Walter se continua a non funzionare.</string>
+    <string name="title_activity_settings">Leanback SettingsActivity</string>
+    <string name="browse_title">Impostazioni</string>
+    <string name="google_settings">Google Account</string>
+    <!-- Preferences -->
+    <string name="preferences">Preferenze</string>
+    <string name="preferences_name">settings.name</string>
+    <string name="default_name">Nonna</string>
+
+    <!-- Error messages -->
+    <string name="error_fragment_message">An error occurred</string>
+    <string name="dismiss_error">Dismiss</string>
 </resources>
