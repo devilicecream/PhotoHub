@@ -10,4 +10,6 @@ object Constants {
     const val URL_ERROR = "Sorry! Something is wrong with the url, please try again after sometime"
 
     const val INITIALLY_LOADED_ITEM_COUNT = 20
+
+    const val GOOG_RC_SIGN_IN = 56178293
 }

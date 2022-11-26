@@ -3,11 +3,17 @@
 
     <dimen name="dimen_8_dp">8dp</dimen>
     <dimen name="dimen_100_dp">100dp</dimen>
+    <dimen name="dimen_110_dp">110dp</dimen>
     <dimen name="dimen_150_dp">150dp</dimen>
     <dimen name="dimen_300_dp">300dp</dimen>
     <dimen name="dimen_200_dp">200dp</dimen>
     <dimen name="dimen_0_dp">0dp</dimen>
+    <dimen name="dimen_10_dp">10dp</dimen>
+    <dimen name="dimen_12_dp">12dp</dimen>
+    <dimen name="dimen_14_dp">14dp</dimen>
     <dimen name="dimen_16_dp">16dp</dimen>
+    <dimen name="dimen_18_dp">18dp</dimen>
+    <dimen name="dimen_20_dp">20dp</dimen>
     <dimen name="dimen_24_dp">24dp</dimen>
     <dimen name="dimen_32_dp">32dp</dimen>
     <dimen name="dimen_48_dp">48dp</dimen>
@@ -17,7 +23,12 @@
     <dimen name="dimen_300_sp">300sp</dimen>
     <dimen name="dimen_200_sp">200sp</dimen>
     <dimen name="dimen_0_sp">0sp</dimen>
+    <dimen name="dimen_10_sp">10sp</dimen>
+    <dimen name="dimen_12_sp">12sp</dimen>
+    <dimen name="dimen_14_sp">14sp</dimen>
     <dimen name="dimen_16_sp">16sp</dimen>
+    <dimen name="dimen_18_sp">18sp</dimen>
+    <dimen name="dimen_20_sp">20sp</dimen>
     <dimen name="dimen_24_sp">24sp</dimen>
     <dimen name="dimen_32_sp">32sp</dimen>
     <dimen name="dimen_48_sp">48sp</dimen>

@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.walterda.photohub.R
 import com.walterda.photohub.core.utils.*
 import com.walterda.photohub.databinding.FragmentGalleryBinding
 import com.walterda.photohub.features.NavigationDirection
@@ -21,6 +22,7 @@ import com.walterda.photohub.features.NavigationEvent
 import com.walterda.photohub.features.full_screen_view.presentation.FullScreenImageFragmentDirections
 import com.walterda.photohub.features.gallery.domain.models.PhotoListItem
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
@@ -40,7 +42,6 @@ class GalleryFragment : Fragment() {
             WindowInsetsControllerCompat(window, window.decorView)
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +64,11 @@ class GalleryFragment : Fragment() {
 
     private fun init() {
         mViewModel.getPhotos()
+        tv_app_subtitle.setText(
+            String.format("%s %s!",
+                getString(R.string.ciao),
+                LocalStorage(context!!).getCurrentPreferenceName())
+        )
     }
 
     private fun setViews() {
@@ -147,7 +153,6 @@ class GalleryFragment : Fragment() {
     @Subscribe
     fun onEvent(event : NavigationEvent) {
         // Called by eventBus when an event occurs
-//        Log.e("NAV", "onNavEvent: " + event.direction.toString(), )
         val nextItem: PhotoListItem = when (event.direction) {
             NavigationDirection.FORWARD -> {
                 mPhotoListAdapter.getNextItem(mCurrentItem)

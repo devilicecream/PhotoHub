@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
+import com.walterda.photohub.core.photos.GoogleIdentity
 import com.walterda.photohub.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         val view = mBinding.root
         setContentView(view)
+        GoogleIdentity(this).trySilentLogin()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

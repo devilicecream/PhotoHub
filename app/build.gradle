@@ -6,6 +6,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'dagger.hilt.android.plugin'
+//    id 'com.google.gms.google-services'
 }
 
 android {
@@ -21,9 +22,25 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+    signingConfigs {
         release {
+            storeFile file("release-keystore.keystore")
+            storePassword 'password'
+            keyAlias 'release'
+            keyPassword 'password'
+        }
+    }
+
+    buildTypes {
+        debug {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable true
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -38,6 +55,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    packagingOptions {
+        pickFirst 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -49,6 +70,11 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'org.greenrobot:eventbus:3.3.1'
     implementation 'androidx.leanback:leanback:1.0.0'
+
+    // google
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
+    implementation 'com.google.photos.library:google-photos-library-client:1.1.0'
+    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
     // network library
     def retrofit_version = "2.9.0"

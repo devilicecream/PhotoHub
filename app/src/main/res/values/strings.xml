@@ -8,11 +8,19 @@
     <string name="browse_title">Impostazioni</string>
     <string name="google_settings">Google Account</string>
     <!-- Preferences -->
+    <string name="logout">Esci</string>
     <string name="preferences">Preferenze</string>
+    <string name="name_title">Nome saluto</string>
     <string name="preferences_name">settings.name</string>
     <string name="default_name">Nonna</string>
+    <string name="logged_in">Utente Google</string>
+    <string name="album">Foto Album</string>
+    <string name="default_album">-- Nessuno --</string>
 
     <!-- Error messages -->
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
+
+    <!-- Conf -->
+    <string name="google_id_token">491926964381-jc7t5mmod6dhu6bfij90dji2ieuh4vpb.apps.googleusercontent.com</string>
 </resources>
