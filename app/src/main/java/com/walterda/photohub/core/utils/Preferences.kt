@@ -1,7 +1,7 @@
 package com.walterda.photohub.core.photos
 
 enum class PreferenceId {
-    NAME, ALBUM
+    GOOGLE, NAME, ALBUM
 }
 
 data class Preferences(

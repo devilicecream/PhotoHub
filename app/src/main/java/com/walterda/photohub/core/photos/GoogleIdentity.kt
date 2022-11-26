@@ -4,15 +4,30 @@ import android.content.Context
 import android.util.Log
 import com.google.android.gms.auth.api.signin.*
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.common.api.Scope
+import com.google.api.gax.core.FixedCredentialsProvider
+import com.google.api.gax.rpc.UnauthenticatedException
+import com.google.auth.oauth2.AccessToken
+import com.google.auth.oauth2.UserCredentials
+import com.google.photos.library.v1.PhotosLibraryClient
+import com.google.photos.library.v1.PhotosLibrarySettings
+import com.google.photos.library.v1.internal.InternalPhotosLibraryClient.ListSharedAlbumsPagedResponse
+import com.google.photos.types.proto.Album
 import com.walterda.photohub.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.util.*
 
 
 class GoogleIdentity(context: Context) {
     private val mContext: Context = context
 
     private val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestEmail()
         .requestIdToken(context.getString(R.string.google_id_token))
+        .requestServerAuthCode("491926964381-jc7t5mmod6dhu6bfij90dji2ieuh4vpb.apps.googleusercontent.com",false)
+        .requestScopes(Scope("https://www.googleapis.com/auth/photoslibrary.readonly"))
         .requestEmail()
         .build()
 
@@ -24,13 +39,64 @@ class GoogleIdentity(context: Context) {
         return GoogleSignIn.getClient(mContext, gso)
     }
 
+    private fun loadAlbums(account: GoogleSignInAccount) {
+        GlobalScope.launch(context = Dispatchers.IO) {
+            val tok = AccessTokenFactory.requestAccessToken(account, mContext.getString(R.string.google_id_token), mContext.getString(R.string.google_secret))
+            val token = AccessToken(tok, null)
+            val credentials = UserCredentials.newBuilder()
+                .setClientId(mContext.getString(R.string.google_id_token))
+                .setClientSecret(mContext.getString(R.string.google_secret))
+                .setAccessToken(token)
+                .build()
+            Log.w("CREDS", credentials.toString())
+            val settings = PhotosLibrarySettings.newBuilder()
+                .setCredentialsProvider(
+                    FixedCredentialsProvider.create(credentials)
+                )
+                .build()
+
+            val client = account.let { _ -> PhotosLibraryClient.initialize(settings) }
+            val albums = LinkedList<Album>()
+            var response: ListSharedAlbumsPagedResponse? = null
+            try {
+                response = client?.listSharedAlbums()
+            } catch (exc: UnauthenticatedException) {
+                Log.e("PHOTOS", exc.message.toString())
+            }
+
+            if (response != null) {
+                for (album in response.iterateAll()) {
+                    albums.add(album)
+                }
+                if (albums.size > 0) {
+//                    Toast.makeText(mContext, "Found Albums!", 1000).show()
+                    Log.w("ALBUMS", albums.toString())
+                    for (album in albums) {
+                        val mediaResponse = client?.searchMediaItems(album.id)
+                        for (mediaItem in mediaResponse!!.iterateAll()) {
+                            Log.w("MEDIA ITEMS", mediaItem.toString())
+                        }
+                    }
+                } else {
+//                    Toast.makeText(mContext, "No Albums Found", 1000).show()
+                    Log.e("ALBUMS", "SHIT")
+                }
+            } else {
+//                Toast.makeText(mContext, "Empty response!", 1000).show()
+                Log.e("ALBUMS", "BIG SHIT")
+            }
+        }
+
+    }
+
     fun trySilentLogin() {
         Log.w("GOOGLE", "Trying silent login...")
         val task = getSignInClient().silentSignIn()
         if (task.isSuccessful()) {
             // There's immediate result available.
             val signInAccount: GoogleSignInAccount = task.getResult()
-            Log.w("GOOGLE",String.format("Sign in account: %s", signInAccount.toString()))
+            Log.w("GOOGLE", String.format("Sign in account: %s", signInAccount.toString()))
+            loadAlbums(signInAccount)
         } else {
             // There's no immediate result ready, displays some progress indicator and waits for the
             // async callback.
@@ -41,6 +107,7 @@ class GoogleIdentity(context: Context) {
                         "GOOGLE",
                         String.format("(ASYNC) Sign in account: %s", signInAccount.toString()),
                     )
+                    loadAlbums(signInAccount)
                 } catch (apiException: ApiException) {
                     Log.w("GOOGLE", String.format("Sign in failed %s", apiException.status))
                     // You can get from apiException.getStatusCode() the detailed error code

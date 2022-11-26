@@ -24,4 +24,5 @@
 
     <!-- Conf -->
     <string name="google_id_token">491926964381-jc7t5mmod6dhu6bfij90dji2ieuh4vpb.apps.googleusercontent.com</string>
+    <string name="google_secret">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</string>
 </resources>

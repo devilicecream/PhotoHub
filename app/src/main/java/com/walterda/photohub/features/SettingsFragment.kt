@@ -59,10 +59,9 @@ class SettingsFragment : BrowseSupportFragment() {
 
     private fun loadRows() {
         val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
-        val googlePresenter = GoogleInfoPresenter()
+        val listRowAdapter = ArrayObjectAdapter(GoogleInfoPresenter())
 
-        val listRowAdapter = ArrayObjectAdapter(googlePresenter)
-        listRowAdapter.add("test")
+        listRowAdapter.add(Preferences(PreferenceId.GOOGLE, "google", "google"))
         val header = HeaderItem(0, getString(R.string.google_settings))
         rowsAdapter.add(ListRow(header, listRowAdapter))
 
@@ -102,6 +101,9 @@ class SettingsFragment : BrowseSupportFragment() {
                     startActivity(intent)
                 }
                 PreferenceId.ALBUM -> {
+
+                }
+                PreferenceId.GOOGLE -> {
 
                 }
             }

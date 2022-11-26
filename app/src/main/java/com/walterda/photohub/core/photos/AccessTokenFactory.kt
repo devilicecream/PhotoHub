@@ -12,7 +12,7 @@ object AccessTokenFactory {
     private var mAccessToken: String? = null
     private var mTokenExpired: Long = 0
 
-    fun requestAccessToken(googleAccount: GoogleSignInAccount): String? {
+    fun requestAccessToken(googleAccount: GoogleSignInAccount, googleId: String, googleSecret: String): String? {
         if (mAccessToken != null && SystemClock.elapsedRealtime() < mTokenExpired) {
             return mAccessToken
         }
@@ -37,8 +37,8 @@ object AccessTokenFactory {
 
             val b = StringBuilder()
             b.append("code=").append(googleAccount.serverAuthCode).append('&')
-                .append("client_id=").append("148357592852-6mbp15l978f1r0fg52pt39haibt3q71q.apps.googleusercontent.com").append('&')
-                .append("client_secret=").append("ucV63dBYBHTPOSajg_snnt26").append('&')
+                .append("client_id=").append(googleId).append('&')
+                .append("client_secret=").append(googleSecret).append('&')
                 .append("redirect_uri=").append("").append('&')
                 .append("grant_type=").append("authorization_code")
 
@@ -57,16 +57,14 @@ object AccessTokenFactory {
                 return null
             }
 
-            b.setLength(0)
-            var output: String
-
-
-            while ( ( br.readLine()) != null  ) {
-                b.append(br.readLine())
+            val output = StringBuilder()
+            var nextBuf = br.readLine()
+            while ( nextBuf != null  ) {
+                output.append(nextBuf)
+                nextBuf = br.readLine()
             }
 
-            val jsonResponse = JSONObject(b.toString())
-            Log.d("Error:", jsonResponse.toString())
+            val jsonResponse = JSONObject(output.toString())
 
             mAccessToken = jsonResponse.getString("access_token")
             mTokenExpired = SystemClock.elapsedRealtime() + jsonResponse.getLong("expires_in") * 1000
