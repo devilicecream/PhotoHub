@@ -14,7 +14,6 @@ import androidx.leanback.widget.Row
 import androidx.leanback.widget.RowPresenter
 import androidx.core.content.ContextCompat
 import android.util.Log
-import android.widget.Toast
 
 import com.walterda.photohub.R
 import com.walterda.photohub.core.photos.Preferences
@@ -76,10 +75,10 @@ class SettingsFragment : BrowseSupportFragment() {
     }
 
     private fun setupEventListeners() {
-        setOnSearchClickedListener {
-            Toast.makeText(context!!, "Implement your own in-app search", Toast.LENGTH_LONG)
-                .show()
-        }
+//        setOnSearchClickedListener {
+//            Toast.makeText(context!!, "Implement your own in-app search", Toast.LENGTH_LONG)
+//                .show()
+//        }
 
         onItemViewClickedListener = ItemViewClickedListener()
         onItemViewSelectedListener = ItemViewSelectedListener()
