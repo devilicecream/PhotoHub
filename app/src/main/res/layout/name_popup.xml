@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/name_editor_title"
+        android:labelFor="@+id/name_editor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/dimen_48_dp"
+        android:theme="@style/SettingsTitleTextAppearance"
+        android:text="@string/edit_name_title" />
+
+    <EditText
+        android:id="@+id/name_editor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_72_sp"
+        android:layout_marginStart="@dimen/dimen_48_dp"
+        android:layout_marginTop="@dimen/dimen_8_dp"
+        android:autofillHints="@string/name_title"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textSize="@dimen/dimen_48_sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_editor_title"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

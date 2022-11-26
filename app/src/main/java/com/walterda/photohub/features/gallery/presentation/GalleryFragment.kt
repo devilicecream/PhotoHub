@@ -165,4 +165,15 @@ class GalleryFragment : Fragment() {
         mCurrentItem = nextItem
         findNavController().navigate(FullScreenImageFragmentDirections.actionDestFullScreenImageToDestFullScreenImage(nextItem))
     }
+
+    override fun onResume() {
+        super.onResume()
+        tv_app_subtitle.setText(
+            String.format(
+                "%s %s!",
+                getString(R.string.ciao),
+                LocalStorage(context!!).getCurrentPreferenceName()
+            )
+        )
+    }
 }

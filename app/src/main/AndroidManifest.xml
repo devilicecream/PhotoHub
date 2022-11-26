@@ -39,6 +39,11 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".core.utils.NamePopup"
+            android:theme="@style/Theme.Leanback"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".features.MainActivity"
             android:theme="@style/Theme.PhotoHub"
             android:exported="true">

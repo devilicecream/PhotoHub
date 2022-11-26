@@ -32,5 +32,6 @@
     <dimen name="dimen_24_sp">24sp</dimen>
     <dimen name="dimen_32_sp">32sp</dimen>
     <dimen name="dimen_48_sp">48sp</dimen>
+    <dimen name="dimen_72_sp">72sp</dimen>
 
 </resources>

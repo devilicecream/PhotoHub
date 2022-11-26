@@ -1,5 +1,6 @@
 package com.walterda.photohub.features
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.leanback.app.BrowseSupportFragment
@@ -16,8 +17,11 @@ import androidx.core.content.ContextCompat
 import android.util.Log
 
 import com.walterda.photohub.R
+import com.walterda.photohub.core.photos.PreferenceId
 import com.walterda.photohub.core.photos.Preferences
 import com.walterda.photohub.core.utils.LocalStorage
+import com.walterda.photohub.core.utils.NamePopup
+import kotlinx.android.synthetic.main.fragment_gallery.*
 
 /**
  * Loads a grid of cards with movies to browse.
@@ -66,9 +70,8 @@ class SettingsFragment : BrowseSupportFragment() {
 
         val mGridPresenter = SettingsPresenter()
         val gridRowAdapter = ArrayObjectAdapter(mGridPresenter)
-        val name = LocalStorage(context!!).getCurrentPreferenceName()
-        gridRowAdapter.add(Preferences(getString(R.string.name_title), name))
-        gridRowAdapter.add(Preferences(getString(R.string.album), getString(R.string.default_album)))
+        gridRowAdapter.add(Preferences(PreferenceId.NAME, getString(R.string.name_title), LocalStorage(context!!).getCurrentPreferenceName()))
+        gridRowAdapter.add(Preferences(PreferenceId.ALBUM, getString(R.string.album), getString(R.string.default_album)))
         rowsAdapter.add(ListRow(gridHeader, gridRowAdapter))
 
         adapter = rowsAdapter
@@ -91,7 +94,17 @@ class SettingsFragment : BrowseSupportFragment() {
             rowViewHolder: RowPresenter.ViewHolder,
             row: Row
         ) {
-            Log.w(TAG, "Clicked " + item.toString())
+            Log.w(TAG, "CLICKED " + item.toString())
+            val preference = item as Preferences
+            when (preference.id) {
+                PreferenceId.NAME -> {
+                    val intent = Intent(context!!, NamePopup::class.java)
+                    startActivity(intent)
+                }
+                PreferenceId.ALBUM -> {
+
+                }
+            }
         }
     }
 
@@ -102,6 +115,11 @@ class SettingsFragment : BrowseSupportFragment() {
         ) {
             Log.w(TAG, "SELECTED " + item.toString())
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadRows()
     }
 
     companion object {

@@ -23,7 +23,7 @@ data class NavigationEvent(val direction: NavigationDirection)
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mSettingsPasswordTimer: Timer
-    private val mPassword = listOf<Int>(21, 22, 21, 22)
+    private val mPassword = listOf(21, 22, 21, 22)
     private var mCurrentPasswordStep: Int = 0
     private lateinit var mBinding: ActivityMainBinding
 
