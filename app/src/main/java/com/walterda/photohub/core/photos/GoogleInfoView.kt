@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.AttributeSet
-import android.view.KeyEvent
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
@@ -35,15 +34,7 @@ class GoogleInfoView(context: Context, attrs: AttributeSet?): ConstraintLayout(c
             mLoggedName.setText(loggedAccount.displayName)
             mGoogleInfo.visibility = VISIBLE
             mSignInButton.visibility = GONE
-        } else {
-            mGoogleInfo.visibility = GONE
-            mSignInButton.visibility = VISIBLE
-        }
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == 23) {
-            if (mGoogleInfo.visibility == GONE) {
+            mSignInButton.setOnClickListener {
                 val signInIntent: Intent =
                     GoogleIdentity(context).getSignInClient().getSignInIntent()
                 ActivityCompat.startActivityForResult(
@@ -52,12 +43,10 @@ class GoogleInfoView(context: Context, attrs: AttributeSet?): ConstraintLayout(c
                     GOOG_RC_SIGN_IN,
                     null
                 )
-            } else {
-                GoogleIdentity(context).getSignInClient().signOut().addOnCompleteListener {
-                    setUpGoogle()
-                }
             }
+        } else {
+            mGoogleInfo.visibility = GONE
+            mSignInButton.visibility = VISIBLE
         }
-        return super.onKeyDown(keyCode, event)
     }
 }

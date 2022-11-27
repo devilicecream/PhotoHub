@@ -1,4 +1,4 @@
-package com.walterda.photohub.features
+package com.walterda.photohub.features.settings
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -12,6 +12,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.walterda.photohub.R
 import com.walterda.photohub.core.utils.Constants.GOOG_RC_SIGN_IN
+import com.walterda.photohub.features.settings.presentation.SettingsFragment
 
 
 /**

@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.walterda.photohub.core.photos.GoogleIdentity
 import com.walterda.photohub.databinding.ActivityMainBinding
+import com.walterda.photohub.features.settings.SettingsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import java.util.*

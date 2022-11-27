@@ -1,9 +1,8 @@
-package com.walterda.photohub.features
+package com.walterda.photohub.features.settings.presentation
 
 import android.util.Log
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.leanback.widget.ImageCardView
 import androidx.leanback.widget.Presenter
 import com.walterda.photohub.R
 import com.walterda.photohub.core.photos.GoogleIdentity

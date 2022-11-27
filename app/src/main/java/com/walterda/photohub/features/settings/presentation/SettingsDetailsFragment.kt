@@ -1,12 +1,8 @@
-package com.walterda.photohub.features
+package com.walterda.photohub.features.settings.presentation
 
 import android.os.Bundle
 import androidx.leanback.app.DetailsSupportFragment
 import androidx.leanback.app.DetailsSupportFragmentBackgroundController
-import androidx.leanback.widget.OnItemViewClickedListener
-import androidx.leanback.widget.Presenter
-import androidx.leanback.widget.Row
-import androidx.leanback.widget.RowPresenter
 import android.util.Log
 
 /**

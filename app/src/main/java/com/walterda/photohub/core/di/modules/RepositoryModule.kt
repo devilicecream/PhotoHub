@@ -1,7 +1,10 @@
 package com.walterda.photohub.core.di.modules
 
+import com.walterda.photohub.features.gallery.data.repositories.AlbumRepositoryImpl
 import com.walterda.photohub.features.gallery.data.repositories.GalleryRepositoryImpl
+import com.walterda.photohub.features.gallery.data.repositories.IAlbumRepository
 import com.walterda.photohub.features.gallery.data.repositories.IGalleryRepository
+import com.walterda.photohub.features.gallery.data.source.AlbumWebService
 import com.walterda.photohub.features.gallery.data.source.GalleryWebService
 import dagger.Module
 import dagger.Provides
@@ -23,5 +26,11 @@ class RepositoryModule {
     @Singleton
     fun provideGalleryRepositoryImplementation(galleryWebService: GalleryWebService) : IGalleryRepository {
         return GalleryRepositoryImpl(galleryWebService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAlbumRepositoryImplementation(albumWebService: AlbumWebService) : IAlbumRepository {
+        return AlbumRepositoryImpl(albumWebService)
     }
 }

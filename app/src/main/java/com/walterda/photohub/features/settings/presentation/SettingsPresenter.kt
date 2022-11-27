@@ -1,4 +1,4 @@
-package com.walterda.photohub.features
+package com.walterda.photohub.features.settings.presentation
 
 import android.graphics.Color
 import android.view.Gravity

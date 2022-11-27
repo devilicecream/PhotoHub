@@ -1,5 +1,6 @@
-package com.walterda.photohub.features
+package com.walterda.photohub.features.settings.presentation
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -15,10 +16,14 @@ import androidx.leanback.widget.Row
 import androidx.leanback.widget.RowPresenter
 import androidx.core.content.ContextCompat
 import android.util.Log
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 import com.walterda.photohub.R
+import com.walterda.photohub.core.photos.GoogleIdentity
 import com.walterda.photohub.core.photos.PreferenceId
 import com.walterda.photohub.core.photos.Preferences
+import com.walterda.photohub.core.utils.Constants
 import com.walterda.photohub.core.utils.LocalStorage
 import com.walterda.photohub.core.utils.NamePopup
 import kotlinx.android.synthetic.main.fragment_gallery.*
@@ -29,11 +34,14 @@ import kotlinx.android.synthetic.main.fragment_gallery.*
 class SettingsFragment : BrowseSupportFragment() {
 
     private var mDefaultBackground: Drawable? = null
+    private var mLoggedAccount: GoogleSignInAccount? = null
 
     @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         Log.i(TAG, "onCreate")
         super.onActivityCreated(savedInstanceState)
+
+        setUpGoogle()
 
         setupUIElements()
 
@@ -42,6 +50,9 @@ class SettingsFragment : BrowseSupportFragment() {
         setupEventListeners()
     }
 
+    private fun setUpGoogle() {
+        mLoggedAccount = GoogleIdentity(context!!).getLastSignIn()
+    }
 
     private fun setupUIElements() {
         title = getString(R.string.browse_title)
@@ -77,11 +88,6 @@ class SettingsFragment : BrowseSupportFragment() {
     }
 
     private fun setupEventListeners() {
-//        setOnSearchClickedListener {
-//            Toast.makeText(context!!, "Implement your own in-app search", Toast.LENGTH_LONG)
-//                .show()
-//        }
-
         onItemViewClickedListener = ItemViewClickedListener()
         onItemViewSelectedListener = ItemViewSelectedListener()
     }
@@ -104,7 +110,21 @@ class SettingsFragment : BrowseSupportFragment() {
 
                 }
                 PreferenceId.GOOGLE -> {
-
+                    if (mLoggedAccount == null) {
+                        val signInIntent: Intent =
+                            GoogleIdentity(context!!).getSignInClient().getSignInIntent()
+                        ActivityCompat.startActivityForResult(
+                            context as Activity,
+                            signInIntent,
+                            Constants.GOOG_RC_SIGN_IN,
+                            null
+                        )
+                    } else {
+                        GoogleIdentity(context!!).getSignInClient().signOut().addOnCompleteListener {
+                            setUpGoogle()
+                            loadRows()
+                        }
+                    }
                 }
             }
         }
