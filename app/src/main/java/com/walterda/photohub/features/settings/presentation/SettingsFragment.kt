@@ -25,7 +25,6 @@ import com.walterda.photohub.core.photos.PreferenceId
 import com.walterda.photohub.core.photos.Preferences
 import com.walterda.photohub.core.utils.Constants
 import com.walterda.photohub.core.utils.LocalStorage
-import com.walterda.photohub.core.utils.NamePopup
 import kotlinx.android.synthetic.main.fragment_gallery.*
 
 /**
@@ -107,7 +106,8 @@ class SettingsFragment : BrowseSupportFragment() {
                     startActivity(intent)
                 }
                 PreferenceId.ALBUM -> {
-
+                    val intent = Intent(context!!, AlbumChoicePopup::class.java)
+                    startActivity(intent)
                 }
                 PreferenceId.GOOGLE -> {
                     if (mLoggedAccount == null) {

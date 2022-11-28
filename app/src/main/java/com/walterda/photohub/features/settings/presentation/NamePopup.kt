@@ -1,4 +1,4 @@
-package com.walterda.photohub.core.utils
+package com.walterda.photohub.features.settings.presentation
 
 import android.app.Activity
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
 import com.walterda.photohub.R
+import com.walterda.photohub.core.utils.LocalStorage
 
 
 class NamePopup : Activity(), OnEditorActionListener {

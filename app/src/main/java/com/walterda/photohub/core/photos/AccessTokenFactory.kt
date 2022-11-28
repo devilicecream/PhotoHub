@@ -1,109 +1,48 @@
 package com.walterda.photohub.core.photos
 
-import android.os.SystemClock
 import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.MediaType
 import org.json.JSONObject
-import java.io.*
-import java.net.HttpURLConnection
-import java.net.URL
+import java.util.concurrent.TimeUnit
 
 object AccessTokenFactory {
-    private var mAccessToken: String? = null
-    private var mTokenExpired: Long = 0
 
-    fun requestAccessToken(googleAccount: GoogleSignInAccount, googleId: String, googleSecret: String): String? {
-        if (mAccessToken != null && SystemClock.elapsedRealtime() < mTokenExpired) {
-            return mAccessToken
+    suspend fun requestAccessToken(googleAccount: GoogleSignInAccount, googleId: String, googleSecret: String): String? {
+        val client = OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .writeTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
+            .callTimeout(10, TimeUnit.SECONDS)
+            .build()
+
+        val bodyJSON = "{\"code\": \"${googleAccount.serverAuthCode}\", " +
+                "\"client_id\": \"$googleId\", \"client_secret\": \"$googleSecret\", " +
+                "\"redirect_uri\": \"\", \"grant_type\": \"authorization_code\"}"
+
+        val body = RequestBody.create(MediaType.parse("application/json"), bodyJSON)
+        val request = Request.Builder()
+            .url("https://www.googleapis.com/oauth2/v4/token")
+            .method("POST", body)
+            .build()
+
+        val asyncRequest = GlobalScope.async(Dispatchers.IO) { client.newCall(request).execute() }
+        val response = runBlocking(Dispatchers.IO) { asyncRequest.await() }
+//        val response = client.newCall(request).execute()
+        if (!response.isSuccessful) {
+            Log.e("ACCESS_TOKEN", "ERROR: $response")
+            return null
         }
-        mTokenExpired = 0
-        mAccessToken = null
 
-        var conn: HttpURLConnection? = null
-        var os: OutputStream? = null
-        var `is`: InputStream? = null
-        var isr: InputStreamReader? = null
-        var br: BufferedReader? = null
+        val jsonResponse = JSONObject(response.body()!!.string())
 
-        try {
-            val url = URL("https://www.googleapis.com/oauth2/v4/token")
-            conn = url.openConnection() as HttpURLConnection
-            conn.requestMethod = "POST"
-            conn.useCaches = false
-            conn.doInput = true
-            conn.doOutput = true
-            conn.connectTimeout = 3000
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
-
-            val b = StringBuilder()
-            b.append("code=").append(googleAccount.serverAuthCode).append('&')
-                .append("client_id=").append(googleId).append('&')
-                .append("client_secret=").append(googleSecret).append('&')
-                .append("redirect_uri=").append("").append('&')
-                .append("grant_type=").append("authorization_code")
-
-            val postData = b.toString().toByteArray(charset("UTF-8"))
-
-            os = conn.outputStream
-            os!!.write(postData)
-
-            val responseCode = conn.responseCode
-            if (200 <= responseCode && responseCode <= 299) {
-                `is` = conn.inputStream
-                isr = InputStreamReader(`is`!!)
-                br = BufferedReader(isr)
-            } else {
-                Log.d("Error:", conn.responseMessage)
-                return null
-            }
-
-            val output = StringBuilder()
-            var nextBuf = br.readLine()
-            while ( nextBuf != null  ) {
-                output.append(nextBuf)
-                nextBuf = br.readLine()
-            }
-
-            val jsonResponse = JSONObject(output.toString())
-
-            mAccessToken = jsonResponse.getString("access_token")
-            mTokenExpired = SystemClock.elapsedRealtime() + jsonResponse.getLong("expires_in") * 1000
-            return mAccessToken
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            if (os != null) {
-                try {
-                    os.close()
-                } catch (e: IOException) {
-                }
-
-            }
-            if (`is` != null) {
-                try {
-                    `is`.close()
-                } catch (e: IOException) {
-                }
-
-            }
-            if (isr != null) {
-                try {
-                    isr.close()
-                } catch (e: IOException) {
-                }
-
-            }
-            if (br != null) {
-                try {
-                    br.close()
-                } catch (e: IOException) {
-                }
-
-            }
-            if (conn != null) {
-                conn.disconnect()
-            }
-        }
-        return null
+        return jsonResponse.getString("access_token")
     }
 }

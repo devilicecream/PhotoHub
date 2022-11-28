@@ -39,8 +39,13 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".core.utils.NamePopup"
+            android:name=".features.settings.presentation.NamePopup"
             android:theme="@style/Theme.Leanback"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".features.settings.presentation.AlbumChoicePopup"
+            android:theme="@style/Theme.PhotoHub"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity

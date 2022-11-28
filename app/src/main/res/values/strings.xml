@@ -7,16 +7,20 @@
     <string name="title_activity_settings">Leanback SettingsActivity</string>
     <string name="browse_title">Impostazioni</string>
     <string name="google_settings">Google Account</string>
+
     <!-- Preferences -->
     <string name="logout">Esci</string>
     <string name="preferences">Preferenze</string>
     <string name="name_title">Nome saluto</string>
     <string name="preferences_name">settings.name</string>
+    <string name="preferences_album_name">settings.album_name</string>
+    <string name="preferences_album_id">settings.album_id</string>
     <string name="default_name">Nonna</string>
     <string name="logged_in">Utente Google</string>
     <string name="album">Foto Album</string>
     <string name="default_album">-- Nessuno --</string>
     <string name="edit_name_title">Cambia il Nome utilizzato per il saluto</string>
+    <string name="edit_album_title">Cambia l\'Album utilizzato per visualizzare le foto</string>
 
     <!-- Error messages -->
     <string name="error_fragment_message">An error occurred</string>

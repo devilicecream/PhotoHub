@@ -48,7 +48,7 @@ class GoogleIdentity(context: Context) {
     }
 
     //    fun loadAlbums(callback: (result: ListSharedAlbumsPagedResponse?, error: GoogleError?) -> Void) {
-    fun loadAlbums(): ListSharedAlbumsPagedResponse? {
+    suspend fun loadAlbums(): ListSharedAlbumsPagedResponse? {
         val account = getLastSignIn()
         if (account == null) {
 //            callback(null, GoogleError.NOT_LOGGED_IN)
