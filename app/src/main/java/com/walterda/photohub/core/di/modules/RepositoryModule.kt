@@ -1,11 +1,8 @@
 package com.walterda.photohub.core.di.modules
 
-import com.walterda.photohub.features.gallery.data.repositories.AlbumRepositoryImpl
-import com.walterda.photohub.features.gallery.data.repositories.GalleryRepositoryImpl
-import com.walterda.photohub.features.gallery.data.repositories.IAlbumRepository
-import com.walterda.photohub.features.gallery.data.repositories.IGalleryRepository
+import com.walterda.photohub.features.gallery.data.repositories.*
 import com.walterda.photohub.features.gallery.data.source.AlbumWebService
-import com.walterda.photohub.features.gallery.data.source.GalleryWebService
+import com.walterda.photohub.features.gallery.data.source.PhotosWebService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,10 +19,16 @@ copyright (c) 2022 Soumik Bhattacharjee. All rights reserved
 @InstallIn(SingletonComponent::class)
 class RepositoryModule {
 
+//    @Provides
+//    @Singleton
+//    fun provideGalleryRepositoryImplementation(galleryWebService: GalleryWebService) : IGalleryRepository {
+//        return GalleryRepositoryImpl(galleryWebService)
+//    }
+
     @Provides
     @Singleton
-    fun provideGalleryRepositoryImplementation(galleryWebService: GalleryWebService) : IGalleryRepository {
-        return GalleryRepositoryImpl(galleryWebService)
+    fun provideGalleryRepositoryImplementation(photosWebService: PhotosWebService) : IGalleryRepository {
+        return PhotosRepositoryImpl(photosWebService)
     }
 
     @Provides

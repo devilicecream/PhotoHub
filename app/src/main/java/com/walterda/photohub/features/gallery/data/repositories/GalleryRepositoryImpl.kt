@@ -16,18 +16,18 @@ piyal.developer@gmail.com
 copyright (c) 2022 Soumik Bhattacharjee. All rights reserved
  **/
 
-class GalleryRepositoryImpl @Inject constructor(private val galleryWebService: GalleryWebService) :
-    IGalleryRepository {
-    override fun getPhotos(page: Int): Flow<PagingData<PhotoListItem>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = Constants.INITIALLY_LOADED_ITEM_COUNT,
-                enablePlaceholders = false
-            ), pagingSourceFactory = {
-                GalleryListPagingSource(
-                    galleryWebService
-                )
-            }
-        ).flow
-    }
-}
+//class GalleryRepositoryImpl @Inject constructor(private val galleryWebService: GalleryWebService) :
+//    IGalleryRepository {
+//    override fun getPhotos(page: Int): Flow<PagingData<PhotoListItem>> {
+//        return Pager(
+//            config = PagingConfig(
+//                pageSize = Constants.INITIALLY_LOADED_ITEM_COUNT,
+//                enablePlaceholders = false
+//            ), pagingSourceFactory = {
+//                GalleryListPagingSource(
+//                    galleryWebService
+//                )
+//            }
+//        ).flow
+//    }
+//}

@@ -4,6 +4,7 @@ import android.content.Context
 import com.walterda.photohub.core.utils.Constants
 import com.walterda.photohub.core.utils.IConnectivity
 import com.walterda.photohub.features.gallery.data.source.GalleryWebService
+import com.walterda.photohub.features.gallery.data.source.PhotosWebService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +26,11 @@ copyright (c) 2022 Soumik Bhattacharjee. All rights reserved
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
+
+    @Singleton
+    @Provides
+    fun providePhotosWebService(@ApplicationContext context: Context): PhotosWebService =
+        PhotosWebService(context)
 
     @Singleton
     @Provides

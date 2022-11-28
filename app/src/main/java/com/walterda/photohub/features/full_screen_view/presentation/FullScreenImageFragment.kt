@@ -44,7 +44,6 @@ class FullScreenImageFragment : Fragment() {
     @Subscribe
     fun onEvent(event : DPadEvent) {
         // Called by eventBus when an event occurs
-//        showSnackBar(mBinding, "DPAD: " + event.keyCode.toString())
         if (event.keyCode == 22) {
             EventBus.getDefault().post(NavigationEvent(NavigationDirection.FORWARD))
         } else if (event.keyCode == 21) {
@@ -68,7 +67,8 @@ class FullScreenImageFragment : Fragment() {
     private fun setView() {
         try {
             if (connectivity.hasInternetConnection())
-                requireContext().loadImage(mBinding.fullScreenIV, args.photoData?.urls?.regular)
+//                requireContext().loadImage(mBinding.fullScreenIV, args.photoData?.urls?.regular)
+                requireContext().loadImage(mBinding.fullScreenIV, args.photoData?.baseUrl.toString())
             else showSnackBar(mBinding, Constants.NO_NETWORK_CONNECTION)
         } catch (e: Exception) {
             showSnackBar(mBinding, Constants.ERROR_MESSAGE)

@@ -30,10 +30,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        GoogleIdentity(this).trySilentLogin()
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         val view = mBinding.root
         setContentView(view)
-        GoogleIdentity(this).trySilentLogin()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

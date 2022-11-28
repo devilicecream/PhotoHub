@@ -41,7 +41,8 @@ class PhotoListAdapter @Inject constructor (@ActivityContext private val context
     override fun bind(binding: ItemGalleryPhotosBinding, item: PhotoListItem, position: Int) {
         binding.apply {
             root.setOnClickListener { onItemClicked?.let { it(item) } }
-            context.loadImage(ivGalleryPhoto,item.urls?.small)
+            context.loadImage(ivGalleryPhoto,item.baseUrl.toString())
+//            context.loadImage(ivGalleryPhoto,item.urls?.small)
         }
     }
 
