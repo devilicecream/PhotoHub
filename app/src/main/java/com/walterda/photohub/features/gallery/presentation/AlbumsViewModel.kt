@@ -39,14 +39,18 @@ class AlbumsViewModel @Inject constructor(
     fun getAlbums() {
         if (connectivity.hasInternetConnection()) {
             _loading.value = true
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO) {
                 albumRepository.getAlbums(1).catch {
                     Log.e(TAG, "getAlbums: Exception")
-                    _loading.value = false
-                    _errorMessage.value = Constants.ERROR_MESSAGE
+                    viewModelScope.launch(Dispatchers.Main) {
+                        _loading.value = false
+                        _errorMessage.value = Constants.ERROR_MESSAGE
+                    }
                 }.cachedIn(viewModelScope).collectLatest {
-                    _loading.value = false
-                    _pagedAlbumList.value = it
+                    viewModelScope.launch(Dispatchers.Main) {
+                        _loading.value = false
+                        _pagedAlbumList.value = it
+                    }
                 }
             }
         } else {

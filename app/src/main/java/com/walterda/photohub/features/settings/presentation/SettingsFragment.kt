@@ -79,8 +79,15 @@ class SettingsFragment : BrowseSupportFragment() {
 
         val mGridPresenter = SettingsPresenter()
         val gridRowAdapter = ArrayObjectAdapter(mGridPresenter)
+        val selectedAlbum = LocalStorage(context!!).getCurrentPreferenceAlbum()
+        val selectedAlbumName: String
+        if (selectedAlbum == null) {
+            selectedAlbumName = getString(R.string.default_album)
+        } else {
+            selectedAlbumName = selectedAlbum.name
+        }
         gridRowAdapter.add(Preferences(PreferenceId.NAME, getString(R.string.name_title), LocalStorage(context!!).getCurrentPreferenceName()))
-        gridRowAdapter.add(Preferences(PreferenceId.ALBUM, getString(R.string.album), getString(R.string.default_album)))
+        gridRowAdapter.add(Preferences(PreferenceId.ALBUM, getString(R.string.album), selectedAlbumName))
         rowsAdapter.add(ListRow(gridHeader, gridRowAdapter))
 
         adapter = rowsAdapter

@@ -15,12 +15,15 @@
     <string name="preferences_name">settings.name</string>
     <string name="preferences_album_name">settings.album_name</string>
     <string name="preferences_album_id">settings.album_id</string>
+    <string name="preferences_token">settings.token</string>
+    <string name="preferences_token_expiration">settings.token_expiration</string>
     <string name="default_name">Nonna</string>
     <string name="logged_in">Utente Google</string>
     <string name="album">Foto Album</string>
     <string name="default_album">-- Nessuno --</string>
     <string name="edit_name_title">Cambia il Nome utilizzato per il saluto</string>
     <string name="edit_album_title">Cambia l\'Album utilizzato per visualizzare le foto</string>
+    <string name="media_items">Elementi: %s</string>
 
     <!-- Error messages -->
     <string name="error_fragment_message">An error occurred</string>

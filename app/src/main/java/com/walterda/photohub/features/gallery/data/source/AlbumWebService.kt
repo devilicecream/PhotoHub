@@ -17,7 +17,6 @@ class AlbumWebService(context: Context) {
     private val mContext = context
 
     suspend fun getAlbums(page: Int) : AlbumList {
-        Log.e("ALBUMS", "started!!")
         val result = AlbumList()
         if (page > 1) {
             return result
@@ -26,7 +25,6 @@ class AlbumWebService(context: Context) {
         for (album in response.iterateAll()) {
             val gson = Gson()
             val albumString = gson.toJson(album)
-            Log.e("ALBUM", albumString)
             result.add(gson.fromJson(albumString, AlbumListItem::class.java))
         }
         Log.e("ALBUMS", result.toString())

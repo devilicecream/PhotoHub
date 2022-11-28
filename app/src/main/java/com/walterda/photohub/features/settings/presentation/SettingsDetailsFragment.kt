@@ -3,7 +3,6 @@ package com.walterda.photohub.features.settings.presentation
 import android.os.Bundle
 import androidx.leanback.app.DetailsSupportFragment
 import androidx.leanback.app.DetailsSupportFragmentBackgroundController
-import android.util.Log
 
 /**
  * A wrapper fragment for leanback details screens.
@@ -14,7 +13,6 @@ class SettingsDetailsFragment : DetailsSupportFragment() {
     private lateinit var mDetailsBackground: DetailsSupportFragmentBackgroundController
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(TAG, "onCreate DetailsFragment")
         super.onCreate(savedInstanceState)
 
         mDetailsBackground = DetailsSupportFragmentBackgroundController(this)

@@ -57,9 +57,8 @@ class GoogleIdentity(context: Context) {
         }
 //        GlobalScope.launch(context = Dispatchers.IO) {
         val tok = AccessTokenFactory.requestAccessToken(
-            account,
-            mContext.getString(R.string.google_id_token),
-            mContext.getString(R.string.google_secret)
+            mContext,
+            account
         )
         val token = AccessToken(tok, null)
         val credentials = UserCredentials.newBuilder()

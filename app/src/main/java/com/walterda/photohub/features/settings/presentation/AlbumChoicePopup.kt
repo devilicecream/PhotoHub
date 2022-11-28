@@ -19,9 +19,6 @@ import com.walterda.photohub.features.gallery.domain.models.AlbumListItem
 import com.walterda.photohub.features.gallery.presentation.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.album_choice_popup.*
-import kotlinx.android.synthetic.main.fragment_gallery.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -63,7 +60,10 @@ class AlbumChoicePopup : FragmentActivity() {
         mAlbumListAdapter.apply {
             onItemClicked {
                 mCurrentItem = it
-//                findNavController().navigate(GalleryFragmentDirections.actionDestGalleryToDestFullScreenImage(it))
+                Log.w(TAG, "Saving album choice: ${it.id} - ${it.title}")
+                LocalStorage(this@AlbumChoicePopup).setCurrentPreferenceAlbum(it.id, it.title!!)
+                this.setSelectedAlbum(it.id)
+                this.refresh()
             }
         }
         mViewModel.getAlbums()

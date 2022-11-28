@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.walterda.photohub.R
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class LocalStorage(context: Context) {
@@ -13,6 +15,10 @@ class LocalStorage(context: Context) {
         val id: String,
         val name: String
     )
+
+    companion object {
+        private val FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+    }
 
     private fun getSharedPreferences(): SharedPreferences {
         return mContext.getSharedPreferences(mContext.getString(R.string.app_name), MODE_PRIVATE)
@@ -40,11 +46,34 @@ class LocalStorage(context: Context) {
         )
     }
 
-    fun setCurrentPreferenceName(id: String, name: String) {
+    fun setCurrentPreferenceAlbum(id: String, name: String) {
         val preferences = getSharedPreferences()
         val editor = preferences.edit()
         editor.putString(mContext.getString(R.string.preferences_album_id), id)
         editor.putString(mContext.getString(R.string.preferences_album_name), name)
+        editor.commit()
+    }
+
+    fun getCurrentPreferenceToken(): String? {
+        val preferences = getSharedPreferences()
+        return preferences.getString(mContext.getString(R.string.preferences_token), null)
+    }
+
+    fun getCurrentPreferenceTokenExpiration(): LocalDateTime? {
+        val preferences = getSharedPreferences()
+        val expiration_string = preferences.getString(mContext.getString(R.string.preferences_token_expiration), null)
+        if (expiration_string == null) {
+            return expiration_string
+        }
+        return LocalDateTime.parse(expiration_string, FORMATTER)
+    }
+
+    fun setCurrentPreferenceToken(token: String, expiration: LocalDateTime) {
+        val preferences = getSharedPreferences()
+        val editor = preferences.edit()
+        editor.putString(mContext.getString(R.string.preferences_token), token)
+        editor.putString(mContext.getString(R.string.preferences_token_expiration), expiration.format(
+            FORMATTER))
         editor.commit()
     }
 }
