@@ -54,6 +54,14 @@ class LocalStorage(context: Context) {
         editor.commit()
     }
 
+    fun deleteCurrentPreferenceAlbum() {
+        val preferences = getSharedPreferences()
+        val editor = preferences.edit()
+        editor.remove(mContext.getString(R.string.preferences_album_id))
+        editor.remove(mContext.getString(R.string.preferences_album_name))
+        editor.commit()
+    }
+
     fun getCurrentPreferenceToken(): String? {
         val preferences = getSharedPreferences()
         return preferences.getString(mContext.getString(R.string.preferences_token), null)
@@ -74,6 +82,14 @@ class LocalStorage(context: Context) {
         editor.putString(mContext.getString(R.string.preferences_token), token)
         editor.putString(mContext.getString(R.string.preferences_token_expiration), expiration.format(
             FORMATTER))
+        editor.commit()
+    }
+
+    fun deleteCurrentPreferenceToken() {
+        val preferences = getSharedPreferences()
+        val editor = preferences.edit()
+        editor.remove(mContext.getString(R.string.preferences_token))
+        editor.remove(mContext.getString(R.string.preferences_token_expiration))
         editor.commit()
     }
 }

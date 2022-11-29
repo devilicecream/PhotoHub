@@ -24,7 +24,7 @@ object AccessTokenFactory {
         val token = LocalStorage(context).getCurrentPreferenceToken()
         val expiration = LocalStorage(context).getCurrentPreferenceTokenExpiration()
         if (token != null && expiration?.compareTo(LocalDateTime.now())!! >0 ) {
-            Log.w("TOKEN", "token found!")
+            Log.w("TOKEN", "token found! expiration $expiration, now: ${LocalDateTime.now()}")
             return token
         }
         Log.e("TOKEN", "token NOT found!" + token + expiration.toString())
@@ -33,6 +33,10 @@ object AccessTokenFactory {
 
     suspend fun setExisting(context: Context, token: String) {
         LocalStorage(context).setCurrentPreferenceToken(token, LocalDateTime.now().plusHours(EXPIRATION_HOURS))
+    }
+
+    suspend fun delete(context: Context) {
+        LocalStorage(context).deleteCurrentPreferenceToken()
     }
 
     suspend fun requestAccessToken(context: Context, googleAccount: GoogleSignInAccount): String? {

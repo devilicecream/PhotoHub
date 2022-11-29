@@ -18,13 +18,6 @@ copyright (c) 2022 Soumik Bhattacharjee. All rights reserved
 @Module
 @InstallIn(SingletonComponent::class)
 class RepositoryModule {
-
-//    @Provides
-//    @Singleton
-//    fun provideGalleryRepositoryImplementation(galleryWebService: GalleryWebService) : IGalleryRepository {
-//        return GalleryRepositoryImpl(galleryWebService)
-//    }
-
     @Provides
     @Singleton
     fun provideGalleryRepositoryImplementation(photosWebService: PhotosWebService) : IGalleryRepository {

@@ -6,7 +6,6 @@ import androidx.core.content.ContextCompat
 import androidx.leanback.widget.Presenter
 import com.walterda.photohub.R
 import com.walterda.photohub.core.photos.GoogleIdentity
-import com.walterda.photohub.core.photos.GoogleInfoView
 import kotlin.properties.Delegates
 
 

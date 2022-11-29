@@ -3,7 +3,6 @@ package com.walterda.photohub.features.gallery.data.source
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.walterda.photohub.features.gallery.domain.models.PhotoListItem
-import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -23,9 +22,11 @@ class PhotoListPagingSource @Inject constructor(private val photosWebService: Ph
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PhotoListItem> {
         val page = params.key ?: STARTING_PAGE_NUMBER
-        delay(3000)
         return try {
             val list = photosWebService.getPhotos(page = page)
+            if (page == 1 && list.isEmpty()) {
+                return LoadResult.Error(IOException("No media"))
+            }
             LoadResult.Page(
                 data = list,
                 nextKey = if (list.isNotEmpty()) page + 1 else null,

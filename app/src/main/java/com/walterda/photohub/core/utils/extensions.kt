@@ -1,7 +1,6 @@
 package com.walterda.photohub.core.utils
 
 import android.content.Context
-import android.content.Intent
 import android.view.View
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
@@ -64,26 +63,9 @@ fun Context.loadImage(view: ImageView, url: String?) {
         Glide.with(view)
             .load(url)
             .placeholder(circularProgressDrawable)
-            .apply(RequestOptions().override(2048,1600))
+            .apply(RequestOptions().override(1600))
+//            .apply(RequestOptions().override(2048,1600))
             .into(view)
-    } catch (e: Exception) {
-    }
-}
-
-fun Context.share(
-    subject: String? = "Checkout this Image",
-    body: String? = "",
-    chooserTitle: String? = "Share via"
-) {
-    try {
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.type = "text/plain"
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
-        shareIntent.putExtra(
-            Intent.EXTRA_TEXT,
-            "$body"
-        )
-        startActivity(Intent.createChooser(shareIntent, chooserTitle))
     } catch (e: Exception) {
     }
 }

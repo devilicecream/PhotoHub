@@ -17,15 +17,19 @@ import androidx.leanback.widget.RowPresenter
 import androidx.core.content.ContextCompat
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 import com.walterda.photohub.R
+import com.walterda.photohub.core.photos.AccessTokenFactory
 import com.walterda.photohub.core.photos.GoogleIdentity
 import com.walterda.photohub.core.photos.PreferenceId
 import com.walterda.photohub.core.photos.Preferences
 import com.walterda.photohub.core.utils.Constants
 import com.walterda.photohub.core.utils.LocalStorage
 import kotlinx.android.synthetic.main.fragment_gallery.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Loads a grid of cards with movies to browse.
@@ -128,6 +132,10 @@ class SettingsFragment : BrowseSupportFragment() {
                         )
                     } else {
                         GoogleIdentity(context!!).getSignInClient().signOut().addOnCompleteListener {
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                                AccessTokenFactory.delete(context!!)
+                                LocalStorage(context!!).deleteCurrentPreferenceAlbum()
+                            }
                             setUpGoogle()
                             loadRows()
                         }

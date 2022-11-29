@@ -64,6 +64,8 @@ class GoogleIdentity(context: Context) {
         } catch (exc: UnauthenticatedException) {
             Log.e("PHOTOS", exc.message.toString())
             null
+        } finally {
+//            client.close()
         }
     }
 
@@ -92,6 +94,8 @@ class GoogleIdentity(context: Context) {
         } catch (exc: UnauthenticatedException) {
             Log.e("PHOTOS", exc.message.toString())
             null
+        } finally {
+//            client.close()
         }
     }
 

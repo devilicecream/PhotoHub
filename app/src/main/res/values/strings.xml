@@ -26,8 +26,10 @@
     <string name="media_items">Elementi: %s</string>
 
     <!-- Error messages -->
-    <string name="error_fragment_message">An error occurred</string>
-    <string name="dismiss_error">Dismiss</string>
+    <string name="error_fragment_message">C\'è stato un errore</string>
+    <string name="dismiss_error">Chiudi</string>
+    <string name="error_message">Non posso caricare le foto in questo momento</string>
+    <string name="no_network">Non c\'è connessione ad Internet</string>
 
     <!-- Conf -->
     <string name="google_id_token">491926964381-jc7t5mmod6dhu6bfij90dji2ieuh4vpb.apps.googleusercontent.com</string>

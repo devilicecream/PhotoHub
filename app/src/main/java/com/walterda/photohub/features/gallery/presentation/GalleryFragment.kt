@@ -56,19 +56,10 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        init()
         setViews()
         setObservers()
         observeLoadingState()
-    }
-
-    private fun init() {
-        mViewModel.getPhotos()
-        tv_app_subtitle.setText(
-            String.format("%s %s!",
-                getString(R.string.ciao),
-                LocalStorage(context!!).getCurrentPreferenceName())
-        )
+//        loadData()
     }
 
     private fun setViews() {
@@ -168,6 +159,11 @@ class GalleryFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        loadData()
+    }
+
+    fun loadData() {
+        mViewModel.getPhotos()
         tv_app_subtitle.setText(
             String.format(
                 "%s %s!",

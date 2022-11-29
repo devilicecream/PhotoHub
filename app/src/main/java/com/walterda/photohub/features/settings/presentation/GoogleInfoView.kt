@@ -1,4 +1,4 @@
-package com.walterda.photohub.core.photos
+package com.walterda.photohub.features.settings.presentation
 
 import android.app.Activity
 import android.content.Context
@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.SignInButton
 import com.walterda.photohub.R
+import com.walterda.photohub.core.photos.GoogleIdentity
 import com.walterda.photohub.core.utils.Constants.GOOG_RC_SIGN_IN
 
 

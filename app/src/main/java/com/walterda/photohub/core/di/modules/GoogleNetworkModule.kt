@@ -2,6 +2,7 @@ package com.walterda.photohub.core.di.modules
 
 import android.content.Context
 import com.walterda.photohub.features.gallery.data.source.AlbumWebService
+import com.walterda.photohub.features.gallery.data.source.PhotosWebService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,4 +17,8 @@ class GoogleNetworkModule {
     @Provides
     fun provideGooglePhotosService(@ApplicationContext context: Context): AlbumWebService = AlbumWebService(context)
 
+    @Singleton
+    @Provides
+    fun providePhotosWebService(@ApplicationContext context: Context): PhotosWebService =
+        PhotosWebService(context)
 }
