@@ -59,7 +59,7 @@ class GalleryFragment : Fragment() {
         setViews()
         setObservers()
         observeLoadingState()
-//        loadData()
+        loadData()
     }
 
     private fun setViews() {
@@ -157,10 +157,10 @@ class GalleryFragment : Fragment() {
         findNavController().navigate(FullScreenImageFragmentDirections.actionDestFullScreenImageToDestFullScreenImage(nextItem))
     }
 
-    override fun onResume() {
-        super.onResume()
-        loadData()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        loadData()
+//    }
 
     fun loadData() {
         mViewModel.getPhotos()

@@ -8,10 +8,10 @@
       android:scaleY="0.6666667"
       android:translateX="53.333332"
       android:translateY="30">
-    <group android:scaleX="0.66"
-        android:scaleY="0.66"
-        android:translateX="14.2"
-        android:translateY="50.4">
+    <group android:scaleX="0.765"
+        android:scaleY="0.765"
+        android:translateX="4.75"
+        android:translateY="44.1">
         <path
             android:fillColor="#00000000"
             android:fillType="nonZero"
@@ -20,10 +20,10 @@
             android:strokeColor="#FFFFFF" />
     </group>
 
-    <group android:scaleX="0.2262069"
-        android:scaleY="0.2262069"
+    <group android:scaleX="0.25108966"
+        android:scaleY="0.25108966"
         android:translateX="128"
-        android:translateY="70.81836">
+        android:translateY="68.70838">
       <group android:translateY="139.21875">
         <path android:pathData="M12.9375,0L25.59375,0L25.59375,-43.945312L70.52344,-43.945312L70.52344,-55.195312L25.59375,-55.195312L25.59375,-90.07031L74.53125,-90.07031L74.53125,-101.46094L12.9375,-101.46094Z"
             android:fillColor="#FFFFFF"/>

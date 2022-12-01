@@ -21,4 +21,14 @@ data class PhotoListItem(
     var productUrl: URL,
     @SerializedName("baseUrl_")
     var baseUrl: URL,
+    @SerializedName("mediaMetadata_")
+    var mediaMetadata: MediaMetadata,
+) : Parcelable
+
+@Parcelize
+data class MediaMetadata(
+    @SerializedName("width_")
+    var width: Int,
+    @SerializedName("height_")
+    var height: Int,
 ) : Parcelable

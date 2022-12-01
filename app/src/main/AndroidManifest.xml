@@ -19,34 +19,33 @@
     <uses-feature
         android:name="android.software.leanback"
         android:required="true" />
+    <uses-feature
+        android:name="android.hardware.type.television"
+        android:required="true" />
 
 
     <application
         android:name=".PhotoHub"
         android:allowBackup="true"
-        android:banner="@mipmap/ic_banner"
+        android:banner="@mipmap/ic_launcher"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_banner"
+        android:icon="@mipmap/ic_launcher_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoHub"
-        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".features.settings.SettingsActivity"
             android:theme="@style/Theme.Leanback"
-            android:exported="true"
             android:screenOrientation="landscape" />
         <activity
             android:name=".features.settings.presentation.NamePopup"
             android:theme="@style/Theme.Leanback"
-            android:exported="true"
             android:screenOrientation="landscape" />
         <activity
             android:name=".features.settings.presentation.AlbumChoicePopup"
             android:theme="@style/Theme.PhotoHub"
-            android:exported="true"
             android:screenOrientation="landscape" />
         <activity
             android:name=".features.MainActivity"
@@ -55,6 +54,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

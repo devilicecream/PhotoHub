@@ -9,8 +9,11 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.walterda.photohub.core.utils.Constants
 import com.walterda.photohub.core.utils.IConnectivity
+import com.walterda.photohub.core.utils.LocalStorage
+import com.walterda.photohub.core.utils.executeAsyncTask
 import com.walterda.photohub.features.gallery.data.repositories.IGalleryRepository
 import com.walterda.photohub.features.gallery.domain.models.PhotoListItem
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -34,18 +37,21 @@ class GalleryViewModel @Inject constructor(
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
 
-
     fun getPhotos() {
         if (connectivity.hasInternetConnection()) {
             _loading.value = true
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO) {
                 galleryRepository.getPhotos(1).catch {
                     Log.e(TAG, "getPhotos: Exception")
-                    _loading.value = false
-                    _errorMessage.value = Constants.ERROR_MESSAGE
+                    viewModelScope.launch(Dispatchers.Main) {
+                        _loading.value = false
+                        _errorMessage.value = Constants.ERROR_MESSAGE
+                    }
                 }.cachedIn(viewModelScope).collectLatest {
-                    _loading.value = false
-                    _pagedPhotoList.value = it
+                    viewModelScope.launch(Dispatchers.Main) {
+                        _loading.value = false
+                        _pagedPhotoList.value = it
+                    }
                 }
             }
         } else {

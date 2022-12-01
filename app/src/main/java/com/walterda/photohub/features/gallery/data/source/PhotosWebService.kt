@@ -1,6 +1,7 @@
 package com.walterda.photohub.features.gallery.data.source
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.Gson
 import com.walterda.photohub.core.photos.GoogleIdentity
 import com.walterda.photohub.core.utils.LocalStorage

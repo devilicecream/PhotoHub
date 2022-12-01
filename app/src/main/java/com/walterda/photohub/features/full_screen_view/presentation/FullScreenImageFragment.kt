@@ -1,6 +1,7 @@
 package com.walterda.photohub.features.full_screen_view.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,10 +56,19 @@ class FullScreenImageFragment : Fragment() {
 
     private fun setView() {
         try {
-            if (connectivity.hasInternetConnection())
-                // TODO fit better
-                requireContext().loadImage(mBinding.fullScreenIV, args.photoData?.baseUrl.toString())
-            else showSnackBar(mBinding, Constants.NO_NETWORK_CONNECTION)
+            if (connectivity.hasInternetConnection()) {
+                val context = requireContext()
+                val screenSize = context.screenSize()
+                val photoData = args.photoData!!
+                var crop = "-c"
+                if (photoData.mediaMetadata.width < photoData.mediaMetadata.height) {
+                    crop = ""
+                }
+                context.loadImage(
+                    mBinding.fullScreenIV,
+                    photoData.baseUrl.toString() + "=w${screenSize.width}-h${screenSize.height}$crop"
+                )
+            } else showSnackBar(mBinding, Constants.NO_NETWORK_CONNECTION)
         } catch (e: Exception) {
             showSnackBar(mBinding, Constants.ERROR_MESSAGE)
             e.printStackTrace()

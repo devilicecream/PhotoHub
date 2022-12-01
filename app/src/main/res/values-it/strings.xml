@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Fotografie</string>
+    <string name="ciao">Ciao</string>
+    <string name="full_screen_image">A tutto schermo</string>
+    <string name="gallery">Galleria</string>
+    <string name="photo_download_failed">Non è stato possibile scaricare la foto! Contatta Walter se continua a non funzionare.</string>
+    <string name="title_activity_settings">Leanback SettingsActivity</string>
+    <string name="browse_title">Impostazioni</string>
+    <string name="google_settings">Google Account</string>
+
+    <!-- Preferences -->
+    <string name="logout">Esci</string>
+    <string name="preferences">Preferenze</string>
+    <string name="name_title">Nome saluto</string>
+    <string name="preferences_name">settings.name</string>
+    <string name="preferences_album_name">settings.album_name</string>
+    <string name="preferences_album_id">settings.album_id</string>
+    <string name="preferences_token">settings.token</string>
+    <string name="preferences_token_expiration">settings.token_expiration</string>
+    <string name="default_name">Nonna</string>
+    <string name="logged_in">Utente Google</string>
+    <string name="album">Foto Album</string>
+    <string name="default_album">-- Nessuno --</string>
+    <string name="edit_name_title">Cambia il Nome utilizzato per il saluto</string>
+    <string name="edit_album_title">Cambia l\'Album utilizzato per visualizzare le foto</string>
+    <string name="media_items">Elementi: %s</string>
+
+    <!-- Error messages -->
+    <string name="error_fragment_message">C\'è stato un errore</string>
+    <string name="dismiss_error">Chiudi</string>
+    <string name="error_message">Non posso caricare le foto in questo momento</string>
+    <string name="no_network">Non c\'è connessione ad Internet</string>
+
+</resources>

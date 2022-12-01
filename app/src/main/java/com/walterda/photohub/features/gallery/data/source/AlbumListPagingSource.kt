@@ -2,9 +2,7 @@ package com.walterda.photohub.features.gallery.data.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.walterda.photohub.core.utils.Constants
 import com.walterda.photohub.features.gallery.domain.models.AlbumListItem
-import com.walterda.photohub.features.gallery.domain.models.PhotoListItem
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject

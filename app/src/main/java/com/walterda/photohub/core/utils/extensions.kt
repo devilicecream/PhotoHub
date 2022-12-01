@@ -1,6 +1,8 @@
 package com.walterda.photohub.core.utils
 
 import android.content.Context
+import android.util.DisplayMetrics
+import android.util.Size
 import android.view.View
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
@@ -15,6 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 /**
 created by Soumik on 6/16/2022
@@ -68,6 +71,15 @@ fun Context.loadImage(view: ImageView, url: String?) {
             .into(view)
     } catch (e: Exception) {
     }
+}
+
+
+fun Context.screenSize(): Size {
+    val displayMetrics = DisplayMetrics()
+    this.display?.getMetrics(displayMetrics)
+    val height = displayMetrics.heightPixels
+    val width = displayMetrics.widthPixels
+    return Size(width, height)
 }
 
 /** executing a task asynchronously
